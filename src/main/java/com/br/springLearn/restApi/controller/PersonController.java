@@ -24,22 +24,24 @@ public class PersonController {
 	@Autowired
 	private PersonService service;
 	
-	@GetMapping
+	@GetMapping(produces = {"application/json", "application/xml", "application/x-yaml"})
 	public List<PersonVO> listAll() {
 		return service.listAll();
 	}
 	
-	@GetMapping(value="/{id}")
+	@GetMapping(value="/{id}", produces = {"application/json", "application/xml", "application/x-yaml"})
 	public PersonVO findById(@PathVariable("id") Long id) throws ResourceNotFoundException {
 		return service.findById(id);
 	}
 	
-	@PostMapping
+	@PostMapping(produces = {"application/json", "application/xml", "application/x-yaml"},
+			consumes = {"application/json", "application/xml", "application/x-yaml"})
 	public PersonVO create(@RequestBody PersonVO personVO) throws ResourceNotFoundException {
 		return service.create(personVO);
 	}
 	
-	@PutMapping
+	@PutMapping(produces = {"application/json", "application/xml", "application/x-yaml"},
+			consumes = {"application/json", "application/xml", "application/x-yaml"})
 	public PersonVO update(@RequestBody PersonVO personVO) throws ResourceNotFoundException {
 		return service.update(personVO);
 	}
